@@ -14,16 +14,16 @@
     <title>MovieStar</title>
     <link rel="short icon" href="<?= $BASE_URL ?>img/moviestar.ico"/>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.1/css/bootstrap.css" integrity="sha512-tBwPRcI1t+0jTsIMtf//+V1f0xAWHh7pvPE82A2n5FcBrzl6b0LRE6XnxUTRHti59y4Js7z4Wb/zal2HBsVVOQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.css" integrity="sha512-drnvWxqfgcU6sLzAJttJv7LKdjWn0nxWCSbEAtxJ/YYaZMyoNLovG7lPqZRdhgL1gAUfa+V7tbin8y+2llC1cw==" crossorigin="anonymous" />
     <!-- Font-awesome-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <!-- CSS do Projeto -->
     <link rel="stylesheet" href="<?= $BASE_URL ?>css/styles.css">
 </head>
 <body>
 <header>
         <nav id="main-navbar" class="navbar navbar-expand-lg">
-            <a href="<?= $BASE_URL ?>" class="navbar-brand">
+            <a class="navbar-brand" href="<?= $BASE_URL ?>" >
                 <img src="<?= $BASE_URL ?>img/logo.svg" alt="MovieStar" id="logo">
                 <span id="moviestar-title">MovieStar</span>
             </a>
@@ -45,8 +45,6 @@
             </div>
         </nav>
 </header>
-</body>
-</html>
 <?php if(!empty($flassMessage["msg"])): ?>
     <div class="msg-container">
         <p class="msg <?= $flassMessage["type"] ?>"><?= $flassMessage["msg"]?></p>
