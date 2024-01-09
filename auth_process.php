@@ -10,7 +10,7 @@ $message = new Message($BASE_URL);
 $userDAO = new UserDAO($conn, $BASE_URL);
 
 
-// Resgata o ipo do formulário
+// Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
 
 // Verificação do tipo de formulário
@@ -30,12 +30,29 @@ if($type === "register"){
 
             //Verificar se o email já está cadastrado no sistema
             if($userDAO->findByEmail($email) === false){
-                echo "Nenhum usuário foi encontrado.";
+                
+                $user = new User();
+                
+                //Criação de token e senha
+                $userToken = $user->generateToken();
+                //$finalPassword = password_hash($password, PASSWORD_DEFAULT);
+                $finalPassword = $user->generatePassword($password);
 
+                
+                $user->name = $name;
+                $user->lastname = $lastname;
+                $user->email = $email;
+                $user->password = $finalPassword;
+                $user->token = $userToken;
+                
+                $auth = true;
+
+                $userDAO->create($user, $auth);
+                
             }else{
 
                 // Enviar msg de erro, usuário já existe
-                $message->setMessage("Por favor verifique, email já cadastrado.", "error", "back");
+                $message->setMessage("Usuário já cadastrado, por favor, tente outro e-mail.", "error", "back");
 
             }
 
@@ -52,4 +69,17 @@ if($type === "register"){
     }
 } else if($type === "login"){
 
+    $email = filter_input(INPUT_POST, "email");
+    $password = filter_input(INPUT_POST, "password");
+
+    // Tentar autenciar usuário
+    if($userDAO->authenticateUser($email, $password)) {
+        $message->setMessage("Seja Bem-vindo!", "success", "editprofile.php");
+
+    } else {
+        // Redireciona usuário caso não consiga identificar
+        $message->setMessage("Usuários e/ou senha incorretos.", "error", "back");
+    }
+} else{
+    $message->setMessage("Informações incorretas.", "error", "back");
 }
